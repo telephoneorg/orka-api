@@ -1,0 +1,9 @@
+[submodule "vendor/graphene-sqlalchemy"]
+	path = vendor/graphene-sqlalchemy
+	url = git@github.com:joeblackwaslike/graphene-sqlalchemy.git
+[submodule "vendor/graphene"]
+	path = vendor/graphene
+	url = git@github.com:joeblackwaslike/graphene.git
+[submodule "vendor/graphql-core"]
+	path = vendor/graphql-core
+	url = git@github.com:joeblackwaslike/graphql-core.git

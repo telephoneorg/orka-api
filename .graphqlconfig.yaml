@@ -1,0 +1,6 @@
+projects:
+  orka-api:
+    schemaPath: schema.graphql
+    extensions:
+      endpoints:
+        local: 'http://localhost:5000/graphql'

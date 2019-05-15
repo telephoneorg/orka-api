@@ -1,0 +1,106 @@
+- name: get_me
+  query: |-
+    query GetMe {
+      me {
+        id
+        firstName
+        lastName
+        email
+        cellPhone
+        dob
+        notificationPolicy {
+          id
+          allowEmail
+          allowSms
+          allowMarketing
+        }
+        contexts {
+          count
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+            hasPreviousPage
+          }
+          edges {
+            cursor
+            node {
+              __typename
+              id
+              status
+              profile {
+                id
+                displayName
+                avatar
+                bio
+              }
+              ... facilitatorFields
+            }
+          }
+        }
+      }
+    }
+
+    fragment facilitatorFields on FacilitatorContext {
+      npi
+      availability
+      licenses {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+          hasPreviousPage
+        }
+        edges {
+          cursor
+          node {
+            id
+            type
+            number
+            expiry
+            usState
+          }
+        }
+      }
+    }
+  context:
+    user: None
+    jwt: None
+  variables: None
+
+- name: get_profile
+  query: |-
+    query GetProfile($id: ID!) {
+      profile(id: $id) {
+        id
+        displayName
+        avatar
+        bio
+      }
+    }
+  context:
+    user: None
+    jwt: None
+  variables:
+    id: UHJvZmlsZTox
+
+
+
+# - name:
+#   query: |-
+#     x
+#   context:
+#     user: None
+#     jwt: None
+#       # email: jackmasters@gmail.com
+#       # sub: c6e73532-83fa-4723-962b-7c7b3d1993aa
+#   variables: None
+#     # input:
+#     #   firstName: Jack
+#     #   lastName: Masters
+#     #   cellPhone: '+16465552671'
+#     #   dob: '1983-04-20'
+#     #   notificationPolicy:
+#     #     allowEmail: true
+#     #     allowSms: false
+#     #     allowMarketing: true

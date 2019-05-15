@@ -1,0 +1,12 @@
+def test_{{ test['name'] }}_{{ operation }}(snapshot, graphene_client, graphene_context):
+    query = """
+        {{ test['query']|indent(width=8) }}
+    """
+    snapshot.assert_match(
+        graphene_client.execute(
+            query,
+            context=graphene_context(user={{ test['context']['user']|default(None) }}, jwt={{ test['context']['jwt']|default(None) }}),
+            variables={{ test['variables']|default(None) }}
+        )
+    )
+

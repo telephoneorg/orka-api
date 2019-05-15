@@ -1,0 +1,9 @@
+local/
+__pycache__
+venv/
+db.db
+orka_api.egg-info/
+untitled.sublime-project
+untitled.sublime-workspace
+.pytest_cache
+pip-wheel-metadata/

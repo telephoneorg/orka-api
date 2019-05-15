@@ -1,0 +1,469 @@
+# source: http://localhost:5000/graphql
+# timestamp: Tue May 14 2019 17:36:52 GMT-0400 (Eastern Daylight Time)
+
+input AddFacilitatorContextInput {
+  profile: ProfileInput
+  npi: String!
+  availability: String!
+  licenses: [FacilitatorLicenseInput]
+  clientMutationId: String
+}
+
+type AddFacilitatorContextPayload {
+  ok: Boolean
+  facilitatorContext: FacilitatorContext
+  clientMutationId: String
+}
+
+input AddFacilitatorLicenseInput {
+  facilitatorContextId: ID!
+  facilitatorLicense: FacilitatorLicenseInput
+  clientMutationId: String
+}
+
+type AddFacilitatorLicensePayload {
+  ok: Boolean
+  facilitatorLicense: FacilitatorLicense
+  clientMutationId: String
+}
+
+input AddParticipantContextInput {
+  profile: ProfileInput!
+  clientMutationId: String
+}
+
+type AddParticipantContextPayload {
+  ok: Boolean
+  participantContext: ParticipantContext
+  clientMutationId: String
+}
+
+input CreateMeInput {
+  firstName: String!
+  lastName: String!
+  cellPhone: String
+  dob: Date!
+  notificationPolicy: NotificationPolicyInput!
+  clientMutationId: String
+}
+
+type CreateMePayload {
+  ok: Boolean
+  user: User
+  clientMutationId: String
+}
+
+"""
+The `Date` scalar type represents a Date
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar Date
+
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime
+
+input DeleteMeInput {
+  clientMutationId: String
+}
+
+type DeleteMePayload {
+  ok: Boolean
+  userId: ID!
+  clientMutationId: String
+}
+
+type FacilitatorContext implements Node & UserContext {
+  created: DateTime
+  updated: DateTime
+  id: ID!
+  type: UserContextType
+  userId: Int!
+  status: UserContextStatus
+  npi: String
+  availability: String
+  licenses(before: String, after: String, first: Int, last: Int): FacilitatorLicenseConnection
+  user: User
+  profile: Profile
+}
+
+input FacilitatorContextInput {
+  profile: ProfileInput
+  npi: String
+  availability: String
+  licenses: [FacilitatorLicenseInput]
+}
+
+type FacilitatorLicense implements Node {
+  created: DateTime!
+  updated: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  facilitatorContextId: Int!
+  type: LicenseType!
+  number: String!
+  expiry: String
+  usState: UsState
+  facilitatorContext: FacilitatorContext
+}
+
+type FacilitatorLicenseConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [FacilitatorLicenseEdge]!
+}
+
+"""A Relay edge containing a `FacilitatorLicense` and its cursor."""
+type FacilitatorLicenseEdge {
+  """The item at the end of the edge"""
+  node: FacilitatorLicense
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input FacilitatorLicenseInput {
+  type: LicenseType
+  number: String
+  expiry: Date
+  usState: UsState
+}
+
+type Identity implements Node {
+  created: DateTime!
+  updated: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  userId: Int!
+  provider: IdentityProvider!
+  subject: String!
+  user: User
+}
+
+type IdentityConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [IdentityEdge]!
+}
+
+"""A Relay edge containing a `Identity` and its cursor."""
+type IdentityEdge {
+  """The item at the end of the edge"""
+  node: Identity
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""An enumeration."""
+enum IdentityProvider {
+  CUP
+}
+
+"""An enumeration."""
+enum LicenseType {
+  TBD
+}
+
+type Mutation {
+  createMe(input: CreateMeInput!): CreateMePayload
+  updateMe(input: UpdateMeInput!): UpdateMePayload
+  deleteMe(input: DeleteMeInput!): DeleteMePayload
+  addParticipantContext(input: AddParticipantContextInput!): AddParticipantContextPayload
+  updateParticipantContext(input: UpdateParticipantContextInput!): UpdateParticipantContextPayload
+  removeParticipantContext(input: RemoveParticipantContextInput!): RemoveParticipantContextPayload
+  addFacilitatorContext(input: AddFacilitatorContextInput!): AddFacilitatorContextPayload
+  updateFacilitatorContext(input: UpdateFacilitatorContextInput!): UpdateFacilitatorContextPayload
+  removeFacilitatorContext(input: RemoveFacilitatorContextInput!): RemoveFacilitatorContextPayload
+  addFacilitatorLicense(input: AddFacilitatorLicenseInput!): AddFacilitatorLicensePayload
+  removeFacilitatorLicense(input: RemoveFacilitatorLicenseInput!): RemoveFacilitatorLicensePayload
+}
+
+"""An object with an ID"""
+interface Node {
+  """The ID of the object."""
+  id: ID!
+}
+
+type NotificationPolicy implements Node {
+  created: DateTime!
+  updated: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  userId: Int!
+  allowEmail: Boolean
+  allowSms: Boolean
+  allowMarketing: Boolean
+  user: User
+}
+
+input NotificationPolicyInput {
+  allowEmail: Boolean
+  allowSms: Boolean
+  allowMarketing: Boolean
+}
+
+"""
+The Relay compliant `PageInfo` type, containing data necessary to paginate this connection.
+"""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type ParticipantContext implements Node & UserContext {
+  created: DateTime
+  updated: DateTime
+  id: ID!
+  type: UserContextType
+  userId: Int!
+  status: UserContextStatus
+  user: User
+  profile: Profile
+}
+
+input ParticipantContextInput {
+  profile: ProfileInput
+}
+
+type Profile implements Node {
+  created: DateTime!
+  updated: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  userContextId: Int!
+  displayName: String
+  avatar: String
+  bio: String
+}
+
+input ProfileInput {
+  displayName: String
+  avatar: String
+  bio: String
+}
+
+type Query {
+  """The ID of the object"""
+  node(id: ID!): Node
+  me: User!
+
+  """The ID of the object"""
+  profile(id: ID!): Profile!
+}
+
+input RemoveFacilitatorContextInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type RemoveFacilitatorContextPayload {
+  ok: Boolean
+  facilitatorContextId: ID!
+  clientMutationId: String
+}
+
+input RemoveFacilitatorLicenseInput {
+  facilitatorContextId: ID!
+  facilitatorLicenseId: ID!
+  clientMutationId: String
+}
+
+type RemoveFacilitatorLicensePayload {
+  ok: Boolean
+  facilitatorLicenseId: ID!
+  clientMutationId: String
+}
+
+input RemoveParticipantContextInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type RemoveParticipantContextPayload {
+  ok: Boolean
+  participantContextId: ID!
+  clientMutationId: String
+}
+
+input UpdateFacilitatorContextInput {
+  id: ID!
+  facilitatorContext: FacilitatorContextInput
+  clientMutationId: String
+}
+
+type UpdateFacilitatorContextPayload {
+  ok: Boolean
+  facilitatorContext: FacilitatorContext
+  clientMutationId: String
+}
+
+input UpdateMeInput {
+  firstName: String
+  lastName: String
+  cellPhone: String
+  dob: Date
+  notificationPolicy: NotificationPolicyInput
+  clientMutationId: String
+}
+
+type UpdateMePayload {
+  ok: Boolean
+  user: User
+  clientMutationId: String
+}
+
+input UpdateParticipantContextInput {
+  id: ID!
+  participantContext: ParticipantContextInput
+  clientMutationId: String
+}
+
+type UpdateParticipantContextPayload {
+  ok: Boolean
+  participantContext: ParticipantContext
+  clientMutationId: String
+}
+
+type User implements Node {
+  created: DateTime!
+  updated: DateTime!
+
+  """The ID of the object."""
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  cellPhone: String
+  dob: String
+  identities(before: String, after: String, first: Int, last: Int): IdentityConnection
+  contexts(before: String, after: String, first: Int, last: Int): UserContextConnection
+  notificationPolicy: NotificationPolicy
+}
+
+interface UserContext {
+  id: ID!
+  type: UserContextType
+  status: UserContextStatus
+  profile: Profile
+  created: DateTime
+  updated: DateTime
+}
+
+type UserContextConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [UserContextEdge]!
+  count: Int
+}
+
+"""A Relay edge containing a `UserContext` and its cursor."""
+type UserContextEdge {
+  """The item at the end of the edge"""
+  node: UserContext
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""An enumeration."""
+enum UserContextStatus {
+  CREATED
+  DELETED
+  VERIFIED
+}
+
+"""An enumeration."""
+enum UserContextType {
+  BASE
+  PARTICIPANT
+  FACILITATOR
+  EMPLOYEE
+  COMPANY
+}
+
+"""An enumeration."""
+enum UsState {
+  AL
+  AK
+  AS
+  AZ
+  AR
+  CA
+  CO
+  CT
+  DE
+  DC
+  FM
+  FL
+  GA
+  GU
+  HI
+  ID
+  IL
+  IN
+  IA
+  KS
+  KY
+  LA
+  ME
+  MH
+  MD
+  MA
+  MI
+  MN
+  MS
+  MO
+  MT
+  NE
+  NV
+  NH
+  NJ
+  NM
+  NY
+  NC
+  ND
+  MP
+  OH
+  OK
+  OR
+  PW
+  PA
+  PR
+  RI
+  SC
+  SD
+  TN
+  TX
+  UT
+  VT
+  VI
+  VA
+  WA
+  WV
+  WI
+  WY
+}

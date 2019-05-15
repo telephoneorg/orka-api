@@ -1,0 +1,263 @@
+- name: create_me
+  query: |-
+    mutation CreateMe($input: CreateMeInput!) {
+      createMe(input: $input) {
+        ok
+        user {
+          id
+          firstName
+          lastName
+          email
+          dob
+          cellPhone
+          notificationPolicy {
+            id
+            allowEmail
+            allowSms
+            allowMarketing
+          }
+        }
+      }
+    }
+  context:
+    user: false
+    jwt:
+      email: jackmasters@gmail.com
+      sub: c6e73532-83fa-4723-962b-7c7b3d1993aa
+  variables:
+    input:
+      firstName: Jack
+      lastName: Masters
+      cellPhone: '+16465552671'
+      dob: '1983-04-20'
+      notificationPolicy:
+        allowEmail: true
+        allowSms: false
+        allowMarketing: true
+- name: update_me
+  query: |-
+    mutation UpdateMe($input: UpdateMeInput!) {
+      updateMe(input: $input) {
+        ok
+        user {
+          id
+          firstName
+          lastName
+          email
+          cellPhone
+          dob
+          notificationPolicy {
+            id
+            allowEmail
+            allowSms
+            allowMarketing
+          }
+        }
+      }
+    }
+  context:
+    user: null
+    jwt: null
+  variables:
+    input:
+      lastName: Black
+      notificationPolicy:
+        allowMarketing: true
+- name: delete_me
+  query: |-
+    mutation DeleteMe {
+      deleteMe(input: {}) {
+        ok
+        userId
+      }
+    }
+  context:
+    user: null
+    jwt: null
+  variables: null
+- name: add_participant_context
+  query: |-
+    mutation AddParticipantContext($input: AddParticipantContextInput!) {
+      addParticipantContext(input: $input) {
+        ok
+        participantContext {
+          id
+          type
+          status
+          profile {
+            displayName
+            avatar
+            bio
+          }
+        }
+      }
+    }
+  context:
+    user: null
+    jwt: null
+  variables:
+    input:
+      profile:
+        displayName: Big J
+        avatar: https://example.com/img/photo.jpg
+        bio: |-
+          Hello
+
+          How are you?
+- name: update_participant_context
+  query: |-
+    mutation UpdateParticipantContext($input: UpdateParticipantContextInput!) {
+      updateParticipantContext(input: $input) {
+        ok
+        participantContext {
+          id
+          type
+          status
+          profile {
+            displayName
+            avatar
+            bio
+          }
+        }
+      }
+    }
+  context:
+    user: null
+    jwt: null
+  variables:
+    input:
+      id: UGFydGljaXBhbnRDb250ZXh0OjE=
+      participantContext:
+        profile:
+          avatar: https://example.com/img/new-photo.jpg
+- name: remove_participant_context
+  query: |-
+    mutation RemoveParticipantContext($input: RemoveParticipantContextInput!) {
+      removeParticipantContext(input: $input) {
+        ok
+        participantContextId
+      }
+    }
+  context:
+    user: null
+    jwt: null
+  variables:
+    input:
+      id: UGFydGljaXBhbnRDb250ZXh0OjE=
+- name: add_facilitator_context
+  query: |-
+    mutation AddFacilitatorContext($input: AddFacilitatorContextInput!) {
+      addFacilitatorContext(input: $input) {
+        ok
+        facilitatorContext {
+          id
+          type
+          status
+          npi
+          availability
+          profile {
+            displayName
+            avatar
+            bio
+          }
+        }
+      }
+    }
+  context:
+    user: null
+    jwt: null
+  variables:
+    input:
+      npi: 335978n3905n903459
+      availability: <json payload>
+      profile:
+        displayName: Big J
+        avatar: https://example.com/img/photo.jpg
+        bio: |-
+          Hello
+
+          How are you?
+- name: update_facilitator_context
+  query: |-
+    mutation UpdateFacilitatorContext($input: UpdateFacilitatorContextInput!) {
+      updateFacilitatorContext(input: $input) {
+        ok
+        facilitatorContext {
+          id
+          type
+          status
+          npi
+          availability
+          profile {
+            displayName
+            avatar
+            bio
+          }
+        }
+      }
+    }
+  context:
+    user: null
+    jwt: null
+  variables:
+    input:
+      id: RmFjaWxpdGF0b3JDb250ZXh0OjI=
+      facilitatorContext:
+        npi: xxxxUPDATEDxxxx
+        availability: <json payload>
+        profile:
+          displayName: New Big J
+- name: remove_facilitator_context
+  query: |-
+    mutation RemoveFacilitatorContext($input: RemoveFacilitatorContextInput!) {
+      removeFacilitatorContext(input: $input) {
+        ok
+        facilitatorContextId
+      }
+    }
+  context:
+    user: null
+    jwt: null
+  variables:
+    input:
+      id: RmFjaWxpdGF0b3JDb250ZXh0OjI=
+- name: add_facilitator_license
+  query: |-
+    mutation AddFacilitatorLicense($input: AddFacilitatorLicenseInput!) {
+      addFacilitatorLicense(input: $input) {
+        ok
+        facilitatorLicense {
+          id
+          type
+          number
+          expiry
+          usState
+        }
+      }
+    }
+  context:
+    user: null
+    jwt: null
+  variables:
+    input:
+      facilitatorContextId: RmFjaWxpdGF0b3JDb250ZXh0OjI=
+      facilitatorLicense:
+        type: TBD
+        number: xxx
+        expiry: '2020-01-01'
+        usState: NY
+- name: remove_facilitator_license
+  query: |-
+    mutation RemoveFacilitatorLicense($input: RemoveFacilitatorLicenseInput!) {
+      removeFacilitatorLicense(input: $input) {
+        ok
+        facilitatorLicenseId
+      }
+    }
+  context:
+    user: null
+    jwt: null
+  variables:
+    input:
+      facilitatorContextId: RmFjaWxpdGF0b3JDb250ZXh0OjI=
+      facilitatorLicenseId: RmFjaWxpdGF0b3JMaWNlbnNlOjE=
