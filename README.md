@@ -1,5 +1,6 @@
-# STS GraphQL Server
-https://897qfp0jei.execute-api.us-east-1.amazonaws.com/dev/graphql
+# STS GraphQL API Server
+* API: https://897qfp0jei.execute-api.us-east-1.amazonaws.com/dev/graphql
+* Admin: https://897qfp0jei.execute-api.us-east-1.amazonaws.com/dev/admin/
 
 ## Servers
 ### Locally
