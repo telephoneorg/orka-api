@@ -16,7 +16,6 @@ dev:
   - local
   - tests
   - scripts
-  - docs
   - venv
   - orka_api.egg-info
   - pip-wheel-metadata
@@ -61,7 +60,6 @@ dev2:
   - local
   - tests
   - scripts
-  - docs
   - venv
   - orka_api.egg-info
   - pip-wheel-metadata

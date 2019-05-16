@@ -4,11 +4,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_graphql import GraphQLView
 from flask_cors import CORS
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 
 from .cognito_auth import CognitoAuth, cognito_user, load_cognito_tokens
 from .schemas import schema
 from . import models
-
+from .admin.users import register_views
 
 app = Flask(__name__)
 app.config.from_object("orka_api.config.Config")
@@ -20,7 +22,7 @@ cors = CORS(
     origins=app.config["CORS_ORIGINS_GLOBAL"],
     max_age=app.config["CORS_MAX_AGE"],
 )
-
+admin = Admin(app, name="Orka Admin", template_mode="bootstrap3")
 
 app.add_url_rule(
     "/graphql",
@@ -33,6 +35,9 @@ app.add_url_rule(
         ),
     ),
 )
+
+register_views(admin, db)
+
 
 app.before_request(load_cognito_tokens)
 

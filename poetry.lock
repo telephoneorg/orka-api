@@ -6,6 +6,9 @@ optional = false
 python-versions = "*"
 version = "3.0.2"
 
+[package.extras]
+relative = ["python-dateutil"]
+
 [[package]]
 category = "main"
 description = "Bash tab completion for argparse"
@@ -13,6 +16,9 @@ name = "argcomplete"
 optional = false
 python-versions = "*"
 version = "1.9.3"
+
+[package.extras]
+test = ["coverage", "flake8", "pexpect", "wheel"]
 
 [[package]]
 category = "dev"
@@ -43,6 +49,11 @@ name = "attrs"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "19.1.0"
+
+[package.extras]
+dev = ["coverage", "hypothesis", "pympler", "pytest", "six", "zope.interface", "sphinx", "pre-commit"]
+docs = ["sphinx", "zope.interface"]
+tests = ["coverage", "hypothesis", "pympler", "pytest", "six", "zope.interface"]
 
 [[package]]
 category = "main"
@@ -125,6 +136,10 @@ version = "1.1.0"
 [package.dependencies]
 python-jose = "*"
 
+[package.extras]
+async = ["aiohttp", "async-lru"]
+sync = ["requests"]
+
 [[package]]
 category = "dev"
 description = "Cross-platform colored terminal text."
@@ -171,6 +186,27 @@ Jinja2 = ">=2.10"
 Werkzeug = ">=0.14"
 click = ">=5.1"
 itsdangerous = ">=0.24"
+
+[package.extras]
+dev = ["pytest (>=3)", "coverage", "tox", "sphinx", "pallets-sphinx-themes", "sphinxcontrib-log-cabinet"]
+docs = ["sphinx", "pallets-sphinx-themes", "sphinxcontrib-log-cabinet"]
+dotenv = ["python-dotenv"]
+
+[[package]]
+category = "main"
+description = "Simple and extensible admin interface framework for Flask"
+name = "flask-admin"
+optional = false
+python-versions = "*"
+version = "1.5.3"
+
+[package.dependencies]
+Flask = ">=0.7"
+wtforms = "*"
+
+[package.extras]
+aws = ["boto"]
+azure = ["azure-storage-blob"]
 
 [[package]]
 category = "main"
@@ -322,6 +358,12 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "4.3.18"
 
+[package.extras]
+pipfile = ["pipreqs", "requirementslib"]
+pyproject = ["toml"]
+requirements = ["pipreqs", "pip-api"]
+xdg_home = ["appdirs (>=1.4.0)"]
+
 [[package]]
 category = "main"
 description = "Various helpers to pass data to untrusted environments and back."
@@ -340,6 +382,9 @@ version = "2.10.1"
 
 [package.dependencies]
 MarkupSafe = ">=0.23"
+
+[package.extras]
+i18n = ["Babel (>=0.8)"]
 
 [[package]]
 category = "main"
@@ -394,6 +439,12 @@ name = "marshmallow"
 optional = false
 python-versions = "*"
 version = "2.19.2"
+
+[package.extras]
+dev = ["python-dateutil", "simplejson", "pytest", "pytz", "flake8 (3.7.4)", "tox"]
+lint = ["flake8 (3.7.4)"]
+reco = ["python-dateutil", "simplejson"]
+tests = ["pytest", "pytz"]
 
 [[package]]
 category = "dev"
@@ -450,6 +501,9 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.11.0"
 
+[package.extras]
+dev = ["pre-commit", "tox"]
+
 [[package]]
 category = "main"
 description = "Promises/A+ implementation for Python"
@@ -460,6 +514,9 @@ version = "2.2.1"
 
 [package.dependencies]
 six = "*"
+
+[package.extras]
+test = ["coveralls", "futures", "mock", "pytest (>=2.7.3)", "pytest-benchmark", "pytest-cov"]
 
 [[package]]
 category = "dev"
@@ -499,6 +556,9 @@ optional = false
 python-versions = "*"
 version = "0.9.3"
 
+[package.extras]
+rsa = ["cryptography"]
+
 [[package]]
 category = "dev"
 description = "pytest: simple powerful testing with Python"
@@ -517,8 +577,11 @@ setuptools = "*"
 six = ">=1.10.0"
 
 [package.dependencies.more-itertools]
-python = ">=2.8"
+python = ">2.7"
 version = ">=4.0.0"
+
+[package.extras]
+testing = ["argcomplete", "hypothesis (>=3.56)", "nose", "requests", "mock"]
 
 [[package]]
 category = "main"
@@ -544,6 +607,11 @@ ecdsa = "<1.0"
 future = "<1.0"
 rsa = "*"
 six = "<2.0"
+
+[package.extras]
+cryptography = ["cryptography"]
+pycrypto = ["pycrypto (>=2.6.0,<2.7.0)"]
+pycryptodome = ["pycryptodome (>=3.3.1,<4.0.0)"]
 
 [[package]]
 category = "main"
@@ -577,6 +645,10 @@ certifi = ">=2017.4.17"
 chardet = ">=3.0.2,<3.1.0"
 idna = ">=2.5,<2.9"
 urllib3 = ">=1.21.1,<1.25"
+
+[package.extras]
+security = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)"]
+socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7)", "win-inet-pton"]
 
 [[package]]
 category = "main"
@@ -647,6 +719,11 @@ version = "0.5.0"
 six = ">=1.10.0"
 termcolor = "*"
 
+[package.extras]
+nose = ["nose"]
+pytest = ["pytest"]
+test = ["six", "pytest (>=3.0)", "pytest-cov", "nose", "django (>=1.10.6)"]
+
 [[package]]
 category = "main"
 description = "Database Abstraction Library"
@@ -654,6 +731,18 @@ name = "sqlalchemy"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "1.3.3"
+
+[package.extras]
+mssql = ["pyodbc"]
+mssql_pymssql = ["pymssql"]
+mssql_pyodbc = ["pyodbc"]
+mysql = ["mysqlclient"]
+oracle = ["cx-oracle"]
+postgresql = ["psycopg2"]
+postgresql_pg8000 = ["pg8000"]
+postgresql_psycopg2binary = ["psycopg2-binary"]
+postgresql_psycopg2cffi = ["psycopg2cffi"]
+pymysql = ["pymysql"]
 
 [[package]]
 category = "main"
@@ -666,6 +755,22 @@ version = "0.33.11"
 [package.dependencies]
 SQLAlchemy = ">=1.0"
 six = "*"
+
+[package.extras]
+anyjson = ["anyjson (>=0.3.3)"]
+arrow = ["arrow (>=0.3.4)"]
+babel = ["Babel (>=1.3)"]
+color = ["colour (>=0.0.4)"]
+encrypted = ["cryptography (>=0.6)"]
+enum = ["enum34"]
+intervals = ["intervals (>=0.7.1)"]
+ipaddress = ["ipaddr"]
+password = ["passlib (>=1.6,<2.0)"]
+phone = ["phonenumbers (>=5.9.2)"]
+test = ["pytest (>=2.7.1)", "Pygments (>=1.2)", "Jinja2 (>=2.3)", "docutils (>=0.10)", "flexmock (>=0.9.7)", "mock (2.0.0)", "psycopg2 (>=2.5.1)", "pg8000 (>=1.12.4)", "pytz (>=2014.2)", "python-dateutil (>=2.2)", "pymysql", "flake8 (>=2.4.0)", "isort (>=4.2.2)", "pyodbc"]
+test_all = ["anyjson (>=0.3.3)", "arrow (>=0.3.4)", "Babel (>=1.3)", "colour (>=0.0.4)", "cryptography (>=0.6)", "enum34", "intervals (>=0.7.1)", "ipaddr", "passlib (>=1.6,<2.0)", "phonenumbers (>=5.9.2)", "pytest (>=2.7.1)", "Pygments (>=1.2)", "Jinja2 (>=2.3)", "docutils (>=0.10)", "flexmock (>=0.9.7)", "mock (2.0.0)", "psycopg2 (>=2.5.1)", "pg8000 (>=1.12.4)", "pytz (>=2014.2)", "python-dateutil (>=2.2)", "pymysql", "flake8 (>=2.4.0)", "isort (>=4.2.2)", "pyodbc", "python-dateutil", "furl (>=0.4.1)"]
+timezone = ["python-dateutil"]
+url = ["furl (>=0.4.1)"]
 
 [[package]]
 category = "dev"
@@ -702,6 +807,9 @@ version = "2.4.6"
 [package.dependencies]
 cfn_flip = ">=1.0.2"
 
+[package.extras]
+policy = ["awacs (>=0.8)"]
+
 [[package]]
 category = "dev"
 description = "a fork of Python 2 and 3 ast modules with type comment support"
@@ -727,6 +835,10 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4"
 version = "1.24.3"
 
+[package.extras]
+secure = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "certifi", "ipaddress"]
+socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7,<2.0)"]
+
 [[package]]
 category = "main"
 description = "The comprehensive WSGI web application library."
@@ -735,6 +847,11 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.15.2"
 
+[package.extras]
+dev = ["pytest", "coverage", "tox", "sphinx", "pallets-sphinx-themes", "sphinx-issues"]
+termcolor = ["termcolor"]
+watchdog = ["watchdog"]
+
 [[package]]
 category = "main"
 description = "A built-package format for Python."
@@ -742,6 +859,9 @@ name = "wheel"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.33.1"
+
+[package.extras]
+test = ["pytest (>=3.0.0)", "pytest-cov"]
 
 [[package]]
 category = "dev"
@@ -758,6 +878,17 @@ name = "wsgi-request-logger"
 optional = false
 python-versions = "*"
 version = "0.4.6"
+
+[[package]]
+category = "main"
+description = "A flexible forms validation and rendering library for Python web development."
+name = "wtforms"
+optional = false
+python-versions = "*"
+version = "2.2.1"
+
+[package.extras]
+locale = ["Babel (>=1.3)"]
 
 [[package]]
 category = "main"
@@ -792,7 +923,7 @@ wheel = ">=0.30.0"
 wsgi-request-logger = "0.4.6"
 
 [metadata]
-content-hash = "dd6b58223e40882e1f9cd6ee37142fee655a6e16b70557fe0b8fae3d19c2afd2"
+content-hash = "d54dbcd6301dfa0a59d83d65d493705df828f67bd606c74fba98b861317eaf54"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -813,6 +944,7 @@ docutils = ["02aec4bd92ab067f6ff27a38a38a41173bf01bed8f89157768c1573f53e474a6", 
 durationpy = ["5ef9416b527b50d722f34655becfb75e49228eb82f87b855ed1911b3314b5408"]
 ecdsa = ["20c17e527e75acad8f402290e158a6ac178b91b881f941fc6ea305bfdfb9657c", "5c034ffa23413ac923541ceb3ac14ec15a0d2530690413bff58c12b80e56d884"]
 flask = ["2271c0070dbcb5275fad4a82e29f23ab92682dc45f9dfbc22c02ba9b9322ce48", "a080b744b7e345ccfcbc77954861cb05b3c63786e93f2b3875e0913d44b43f05"]
+flask-admin = ["ca0be6ec11a6913b73f656c65c444ae5be416c57c75638dd3199376ce6bc7422"]
 flask-cors = ["7ad56ee3b90d4955148fc25a2ecaa1124fc84298471e266a7fea59aeac4405a5", "7e90bf225fdf163d11b84b59fb17594d0580a16b97ab4e1146b1fb2737c1cfec"]
 flask-graphql = ["b4e23dfd767f7028835208db0bfa7145f59467225882e6d4f560d15c09f32de8"]
 flask-sqlalchemy = ["0c9609b0d72871c540a7945ea559c8fdf5455192d2db67219509aed680a3d45a", "8631bbea987bc3eb0f72b1f691d47bd37ceb795e73b59ab48586d76d75a7c605"]
@@ -870,4 +1002,5 @@ werkzeug = ["0a73e8bb2ff2feecfc5d56e6f458f5b99290ef34f565ffb2665801ff7de6af7a", 
 wheel = ["66a8fd76f28977bb664b098372daef2b27f60dc4d1688cfab7b37a09448f0e9d", "8eb4a788b3aec8abf5ff68d4165441bc57420c9f64ca5f471f58c3969fe08668"]
 wrapt = ["4aea003270831cceb8a90ff27c4031da6ead7ec1886023b80ce0dfe0adf61533"]
 wsgi-request-logger = ["445d7ec52799562f812006394d0b4a7064b37084c6ea6bd74ea7a2136c97ed83"]
+wtforms = ["0cdbac3e7f6878086c334aa25dc5a33869a3954e9d1e015130d65a69309b3b61", "e3ee092c827582c50877cdbd49e9ce6d2c5c1f6561f849b3b068c1b8029626f1"]
 zappa = ["621209ceaf2cf5fcc18ed6bb6cf53aeb2315e38989a6929cbb49c66b5454d656", "86b125c0e9696b177f61bf636ab19ead7aba1bb9281cdba0651825358337008e", "b7a04172407cdb9277cb166b42920d3c5d745fd50204d1ce7f42769e61b6649e"]
